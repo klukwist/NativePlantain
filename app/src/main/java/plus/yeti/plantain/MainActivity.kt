@@ -2,6 +2,11 @@ package plus.yeti.plantain
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun commonCode() {
-        val sharedResult = createApplicationScreenMessage()
+        lifecycleScope.launch {
+            val sharedResult = withContext(Dispatchers.IO) { getCommonResponse() }
+            labelTextView.text = sharedResult ?: "no data"
+        }
     }
 }
