@@ -1,0 +1,3 @@
+rootProject.name='NativePlantain'
+include ':app'
+include ':common'
